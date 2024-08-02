@@ -1,13 +1,21 @@
-body {
+html, body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.principal {
     display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
 }
 
 .sidebar {
-    width: 250px;
-    height: 100vh;
+    height: 100%;
+    width: 16%;
     background-color: #3e7b99;
     color: #fff;
     display: flex;
@@ -26,12 +34,7 @@ body {
 
 .sidebar ul li {
     width: 100%;
-    text-align: center;
     cursor: pointer;
-}
-
-.sidebar ul li:hover {
-    background-color: #444;
 }
 
 .sidebar button {
@@ -49,6 +52,7 @@ body {
 }
 
 .content {
+    display: flex;
     flex-grow: 1;
     padding: 20px;
 }
@@ -146,4 +150,34 @@ li {
 li a {
     margin-bottom: 5px;
     border-radius: 5px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    margin-top: 30%;
+}
+
+.info_user {
+    background: #5188a3;
+    border-radius: 5px;
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 8%;
+}
+
+.profile_picture img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #dfdfdf;
+    margin: 10px;
+  }
+
+span {
+    margin: 7px;
 }
