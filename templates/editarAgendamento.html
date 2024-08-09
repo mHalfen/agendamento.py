@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}Editar{% endblock %}
+
+{% block content %}
+
+    <form action="{{ url_for('home.home_visualizarAgendamento_editar', id=agendamentos.id) }}" method="post" class="formE">
+        <div class="formEdiv">
+            <h3>Agendamento</h3>
+            <label>Responsável</label>
+            <input type="text" name="dateContatoRespForm" value="{{ agendamentos.dateContatoResp }}">
+
+            <label>Data de Entrega</label>
+            <input type="date" name="dateForm" value="{{ agendamentos.date }}" required>
+
+            <label>Depósito</label>
+            <input type="text" name="depositoForm" value="" required>
+                    
+            <label>CNPJ</label>
+            <input type="text" id="cnpj" name="cnpjForm" value="{{ agendamentos.cnpj }}" required>
+                    
+            <label>Fornecedor</label>
+            <input type="text" id="fornecedor" name="fornecedorForm" value="{{ agendamentos.fornecedor }}" required>
+                    
+            <label>N° Pedido</label>
+            <input type="text" id="numeroPedido" name="numeroPedidoForm" value="{{ agendamentos.numeroPedido }}" required>
+
+            <label>Observação</label>
+            <input type="text" name="obsForm" value="{{ agendamentos.observacao }}">
+
+            <label>Volume Pallets</label>
+            <input type="text" name="volumePalletsForm" value="{{ agendamentos.volumePallets }}">
+
+            <label>Volume Cxs</label>
+            <input type="text" name="volumeCxsForm" value="{{ agendamentos.volumeCxs }}">
+        </div>
+
+        <div class="formEdiv">
+            <h3>Divergências</h3>
+            <label>Divergência</label>
+            <select name="divergForm">
+                <option value="sim" {% if novaDiverg.diverg == 'sim' %}selected{% endif %}>Sim</option>
+                <option value="nao" {% if novaDiverg.diverg == 'nao' %}selected{% endif %}>Não</option>
+            </select>
+
+            <label>Motivo</label>
+            <input type="text" name="divergMotivoForm" value="{{ novaDiverg.divergMotivo }}">
+
+            <label>Observação</label>
+            <input type="text" name="divergObsForm" value="{{ novaDiverg.divergObs }}">
+        </div>
+
+        <div class="formEdiv">
+            <h3>Trocas</h3>
+            <label>Trocas</label>
+            <input type="text" name="trocasForm" value="">
+
+            <label>Valor Trocas</label>
+            <input type="text" name="trocasValorForm" value="">
+
+            <label>Observação</label>
+            <input type="text" name="trocasObsForm" value="">
+
+            <h3>Devoluções</h3>
+            <label>Devoluções</label>
+            <input type="text" name="devolucoes" value="">
+
+            <label>Observação</label>
+            <input type="text" name="devolucoesObsForm" value="">
+
+            <label>Valor Devolução</label>
+            <input type="text" name="devolucoesValorForm" value="">
+        </div>
+
+        <div class="formEdiv">
+            <h3>Recebimento</h3>
+            <label>Recebimento</label>
+            <input type="text" name="recebimento" value="">
+            
+            <label>Observação</label>
+            <input type="text" name="recebimentObs" value="">
+
+            <label>Qtde Pallets</label>
+            <input type="text" name="recebimentoQtdePalletsForm" value="">
+
+            <label>Qtde Cxs</label>
+            <input type="text" name="recebimentoQtdeChapasForm" value="">
+        </div>
+
+        <div>
+            <button type="submit">Enviar</button>
+        </div>
+    </form>
+
+{% endblock %}
