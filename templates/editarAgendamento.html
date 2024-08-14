@@ -14,7 +14,7 @@
             <input type="date" name="dateForm" value="{{ agendamentos.date }}" required>
 
             <label>Depósito</label>
-            <input type="text" name="depositoForm" value="" required>
+            <input type="text" name="depositoForm" value="{{ agendamentos.deposito }}" required>
                     
             <label>CNPJ</label>
             <input type="text" id="cnpj" name="cnpjForm" value="{{ agendamentos.cnpj }}" required>
@@ -53,38 +53,48 @@
         <div class="formEdiv">
             <h3>Trocas</h3>
             <label>Trocas</label>
-            <input type="text" name="trocasForm" value="">
-
+            <select name="trocasForm">
+                <option value="sim" {% if novaTroca.trocas == 'sim' %}selected{% endif %}>Sim</option>
+                <option value="nao" {% if novaTroca.trocas == 'nao' %}selected{% endif %}>Não</option>
+            </select>
+            
             <label>Valor Trocas</label>
-            <input type="text" name="trocasValorForm" value="">
-
+            <input type="text" name="trocasValorForm" value="{{ novaTroca.trocasValor if novaTroca else '' }}">
+            
             <label>Observação</label>
-            <input type="text" name="trocasObsForm" value="">
+            <input type="text" name="trocasObsForm" value="{{ novaTroca.trocasObs if novaTroca else '' }}">
+            
 
             <h3>Devoluções</h3>
             <label>Devoluções</label>
-            <input type="text" name="devolucoes" value="">
+            <select name="devolucoesForm">
+                <option value="sim" {% if novaDevolucao.devolucoes == 'sim' %}selected{% endif %}>Sim</option>
+                <option value="nao" {% if novaDevolucao.devolucoes == 'nao' %}selected{% endif %}>Não</option>
+            </select>
 
             <label>Observação</label>
-            <input type="text" name="devolucoesObsForm" value="">
+            <input type="text" name="devolucoesObsForm" value="{{ novaDevolucao.devolucoesObs if novaDevolucao else '' }}">
 
             <label>Valor Devolução</label>
-            <input type="text" name="devolucoesValorForm" value="">
+            <input type="text" name="devolucoesValorForm" value="{{ novaDevolucao.devolucoesValor if novaDevolucao else '' }}">
         </div>
 
         <div class="formEdiv">
             <h3>Recebimento</h3>
             <label>Recebimento</label>
-            <input type="text" name="recebimento" value="">
+            <select name="recebimentoForm">
+                <option value="sim" {% if novoRecebimento.recebimento == 'sim' %}selected{% endif %}>Sim</option>
+                <option value="nao" {% if novoRecebimento.recebimento == 'nao' %}selected{% endif %}>Não</option>
+            </select>
             
             <label>Observação</label>
-            <input type="text" name="recebimentObs" value="">
+            <input type="text" name="recebimentObsForm" value="{{ novoRecebimento.recebimentObs if novoRecebimento else '' }}">
 
             <label>Qtde Pallets</label>
-            <input type="text" name="recebimentoQtdePalletsForm" value="">
+            <input type="text" name="recebQtdePalletsForm" value="{{ novoRecebimento.recebQtdePallets if novoRecebimento else '' }}">
 
             <label>Qtde Cxs</label>
-            <input type="text" name="recebimentoQtdeChapasForm" value="">
+            <input type="text" name="recebQtdeChapasForm" value="{{ novoRecebimento.recebQtdeChapas if novoRecebimento else '' }}">
         </div>
 
         <div>

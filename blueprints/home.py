@@ -63,14 +63,35 @@ def home_visualizarAgendamento():
 @home_bp.route('/home/visualizarAgendamento/editar/<int:id>', methods=['GET', 'POST'])
 def home_visualizarAgendamento_editar(id):
     agendamentos = db.session.query(Agendamentos).filter_by(id=id).first()
+    novaDiverg = db.session.query(Divergencias).filter_by(id=id).first()
+    novaTroca = db.session.query(Trocas).filter_by(id=id).first()
+    novaDevolucao = db.session.query(Devolucoes).filter_by(id=id).first()
+    novoRecebimento = db.session.query(Recebimento).filter_by(id=id).first()
 
     if request.method == 'GET':
-        novaDiverg = db.session.query(Agendamentos).filter_by(id=id).first()
+        novaDiverg = db.session.query(Divergencias).filter_by(id=id).first()
+        novaTroca = db.session.query(Trocas).filter_by(id=id).first()
+        novaDevolucao = db.session.query(Devolucoes).filter_by(id=id).first()
+        novoRecebimento = db.session.query(Recebimento).filter_by(id=id).first()
 
         if not novaDiverg:
             novaDiverg = Divergencias()
+            
+        if not novaTroca:
+            novaTroca = Trocas()
 
-        return render_template('editarAgendamento.html', agendamentos=agendamentos, novaDiverg=novaDiverg)
+        if not novaDevolucao:
+            novaDevolucao = Devolucoes()
+
+        if not novoRecebimento:
+            novoRecebimento = Recebimento()
+
+        return render_template('editarAgendamento.html',
+                               agendamentos = agendamentos,
+                               novaDiverg = novaDiverg,
+                               novaTroca = novaTroca,
+                               novaDevolucao = novaDevolucao,
+                               novoRecebimento = novoRecebimento)
     
     elif request.method == 'POST':
         agendamentos.dateContatoResp = request.form['dateContatoRespForm']
@@ -84,6 +105,9 @@ def home_visualizarAgendamento_editar(id):
         agendamentos.volumeCxs = request.form['volumeCxsForm']
 
         novaDiverg = db.session.query(Divergencias).filter_by(id=id).first()
+        novaTroca = db.session.query(Trocas).filter_by(id=id).first()
+        novaDevolucao = db.session.query(Devolucoes).filter_by(id=id).first()
+        novoRecebimento = db.session.query(Recebimento).filter_by(id=id).first()
         
         if novaDiverg:
             novaDiverg.diverg = request.form['divergForm']
@@ -96,8 +120,49 @@ def home_visualizarAgendamento_editar(id):
                 divergMotivo=request.form['divergMotivoForm'],
                 divergObs=request.form['divergObsForm']
             )
+            db.session.add(novaDiverg)
 
-        db.session.add(novaDiverg)
+        if novaTroca:
+            novaTroca.trocas = request.form['trocasForm']
+            novaTroca.trocasObs = request.form['trocasObsForm']
+            novaTroca.trocasValor = request.form['trocasValorForm']
+        else:
+            novaTroca = Trocas(
+                id=id,
+                trocas=request.form['trocasForm'],
+                trocasObs=request.form['trocasObsForm'],
+                trocasValor=request.form['trocasValorForm']
+            )
+            db.session.add(novaTroca)
+
+        if novaDevolucao:
+            novaDevolucao.devolucoes = request.form['devolucoesForm']
+            novaDevolucao.devolucoesObs = request.form['devolucoesObsForm']
+            novaDevolucao.devolucoesValor = request.form['devolucoesValorForm']
+        else:
+            novaDevolucao = Devolucoes(
+                id=id,
+                devolucoes = request.form['devolucoesForm'],
+                devolucoesObs = request.form['devolucoesObsForm'],
+                devolucoesValor = request.form['devolucoesValorForm']
+            )
+            db.session.add(novaDevolucao)
+
+        if novoRecebimento:
+            novoRecebimento.recebimento = request.form['recebimentoForm']
+            novoRecebimento.recebimentObs = request.form['recebimentObsForm']
+            novoRecebimento.recebQtdePallets = request.form['recebQtdePalletsForm']
+            novoRecebimento.recebQtdeChapas = request.form['recebQtdeChapasForm']
+        else:
+            novoRecebimento = Recebimento(
+                id=id,
+                recebimento = request.form['recebimentoForm'],
+                recebimentObs = request.form['recebimentObsForm'],
+                recebQtdePallets = request.form['recebQtdePalletsForm'],
+                recebQtdeChapas = request.form['recebQtdeChapasForm']
+            )
+            db.session.add(novoRecebimento)
+
         db.session.commit()
         return redirect (url_for('home.home_visualizarAgendamento'))
 
