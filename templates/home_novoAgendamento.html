@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Novo Agendamento{% endblock %}
+
+{% block content %}
+    <form action="{{ url_for('home.home_novoAgendamento') }}" method="post" class="formN">
+        <div>
+            <h3>Incluir Agendamento</h3>
+        </div>
+        
+        <div class="formNdivs">
+            <div class="formNdiv">
+                <label class="labelN">Responsável</label>
+                <input type="text" name="dateContatoRespForm">
+                <label class="labelN">Data Entrega</label>
+                <input type="date" name="dateForm" required>
+                <label class="labelN">Depósito</label>
+                <input type="text" name="depositoForm" required>
+                <label class="labelN">CNPJ</label>
+                <input type="text" id="cnpj" name="cnpjForm" required>
+                <label class="labelN">Fornecedor</label>
+                <input type="text" id="fornecedor" name="fornecedorForm" required>
+            </div>
+
+            <div class="formNdiv">
+                <label class="labelN">N° Pedido</label>
+                <input type="text" id="numeroPedido" name="numeroPedidoForm" required>
+                <label class="labelN">Observação</label>
+                <input type="text" name="obsForm">
+                <label class="labelN">Volume Pallets</label>
+                <input type="text" name="volumePalletsForm">
+                <label class="labelN">Volume Cxs</label>
+                <input type="text" name="volumeCxsForm">
+            </div>
+        </div>
+
+        <div class="formNbutton">
+            <button type="submit">Agendar!</button>
+        </div>
+    </form>
+{% endblock %}

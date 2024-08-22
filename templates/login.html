@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='icons/bootstrap-icons.css') }}">
+</head>
+
+<body>
+    <form action="{{ url_for('login.login') }}" method="post">
+        <h3>Login:</h3>
+
+        <div>
+            <label>
+                <input class="input" type="email" name="userEmailForm" required>
+                <span>Digite seu Email:</span>
+            </label>
+        </div>
+
+        <div>
+            <label>
+                <input class="input" type="password" name="userSenhaForm" required>
+                <span>Digite sua Senha:</span>
+            </label>
+        </div>
+
+        <button class="submit">Entrar</button>
+
+        <p class="signin">Esqueceu sua Senha?
+            <a href="#">Recuperar Senha</a>
+        </p>
+
+        <p class="signin">Não possuí uma conta?
+            <a href="{{ url_for('login.createAccount') }}">Criar Conta</a>
+        </p>
+    </form>    
+</body>
+</html>

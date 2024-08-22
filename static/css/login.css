@@ -1,0 +1,141 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 100%;
+    padding: 20px;
+    border-radius: 20px;
+    position: relative;
+    background-color: #ffffff;
+    color: #3E7B99;
+    box-shadow: 0 0 10px #3e7b99;
+}
+
+h3 {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -1px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    color: #3E7B99;
+}
+
+h3::before {
+    width: 18px;
+    height: 18px;
+}
+
+h3::after {
+    width: 18px;
+    height: 18px;
+    animation: pulse 1s linear infinite;
+}
+
+h3::before,
+h3::after {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    left: 0px;
+    background-color: #3E7B99;
+}
+
+.signin,
+p.signin {
+    font-size: 14.5px;
+    color: #3E7B99;
+    text-align: center;
+}
+
+.signin a {
+    color: #3E7B99;
+}
+
+.signin a:hover {
+    background-color: #ffffff;
+    color: #007BFF;
+}
+
+label {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+label .input {
+    background-color: #3E7B99;
+    color: #fff;
+    padding: 20px 5px 5px 10px;
+    outline: 0;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+}
+
+label .input + span {
+    color: #ffffff;
+    position: absolute;
+    left: 10px;
+    top: 0px;
+    font-size: 0.9em;
+    cursor: text;
+    transition: 0.3s ease;
+}
+
+label .input:placeholder-shown + span {
+    top: 12.5px;
+    font-size: 0.9em;
+}
+
+label .input:focus + span,
+label .input:valid + span {
+    color: #ffffff;
+    top: 0px;
+    font-size: 0.7em;
+    font-weight: 600;
+}
+
+.input {
+    font-size: medium;
+}
+
+.submit {
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+    transform: .3s ease;
+    background-color: #3E7B99;
+}
+
+.submit:hover {
+    background-color: #ffffff;
+    color: #007BFF;
+    box-shadow: 0 0 10px #3e7b99;
+    cursor: pointer;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(0.9);
+        opacity: 1;
+    }
+
+    to {
+        transform: scale(1.8);
+        opacity: 0;
+    }
+}

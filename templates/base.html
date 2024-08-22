@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}{% endblock %}</title>
+        {% block css %}{% endblock %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='icons/bootstrap-icons.css') }}">
+    </head>
+
+    <body>
+        <div class="principal">
+            <div class="sidebar">
+                <div class="info_user">
+                    <div class="profile_picture">
+                        <i class="bi bi-person-badge"></i>
+                    </div>
+                    <span id="user-name">{{ current_user.userNome }}</span>
+                </div>
+                <div class="menu">
+                    <ul>
+                        <li>
+                            <a href="{{ url_for('home.home') }}">
+                                <i class="bi bi-house"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('home.home_novoAgendamento') }}">
+                                <i class="bi bi-calendar2-plus"></i>
+                                <span>Novo Agendamento</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('home.home_visualizarAgendamento') }}">
+                                <i class="bi bi-calendar2-week"></i>
+                                <span>Visualizar Agendamento</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <button>Logout</button>
+            </div>
+
+            <div class="content">
+                {% block content %}
+                
+                {% endblock %}
+            </div>
+        </div>
+    </body>
+
+</html>

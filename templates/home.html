@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+    <div>
+        <h1>Agendamentos de Hoje:</h1>
+    </div>
+
+    <table>
+
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>CNPJ</th>
+            <th>Fornecedor</th>
+            <th>N° Pedido</th>
+            <th></th>
+        </tr>
+
+        {% for agendamento in agendamentos %}
+        <tr>
+            <td>{{ agendamento.id }}</td>
+            <td>{{ agendamento.date }}</td>
+            <td>{{ agendamento.cnpj }}</td>
+            <td>{{ agendamento.fornecedor }}</td>
+            <td>{{ agendamento.numeroPedido }}</td>
+            <td>
+                <a href="{{ url_for('home.home_visualizarAgendamento_editar', id=agendamento.id) }}" class="btn-v">
+                    <span>Editar</span>                   
+                </a>
+            </td>  
+        </tr>
+        {% endfor %}
+
+    </table>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Editar{% endblock %}
+
+{% block content %}
+    <form action="{{ url_for('home.home_visualizarAgendamento_editar', id=agendamentos.id) }}" method="post" class="formE">
+        <div class="formEdivs">
+            <div class="formEdiv">
+                <h3>Agendamento</h3>
+                <label>Responsável</label>
+                <input type="text" name="dateContatoRespForm" value="{{ agendamentos.dateContatoResp }}">
+                <label>Data de Entrega</label>
+                <input type="date" name="dateForm" value="{{ agendamentos.date }}" required>
+                <label>Depósito</label>
+                <input type="text" name="depositoForm" value="{{ agendamentos.deposito }}" required>
+                <label>CNPJ</label>
+                <input type="text" id="cnpj" name="cnpjForm" value="{{ agendamentos.cnpj }}" required>
+                <label>Fornecedor</label>
+                <input type="text" id="fornecedor" name="fornecedorForm" value="{{ agendamentos.fornecedor }}" required>
+                <label>N° Pedido</label>
+                <input type="text" id="numeroPedido" name="numeroPedidoForm" value="{{ agendamentos.numeroPedido }}" required>
+                <label>Observação</label>
+                <input type="text" name="obsForm" value="{{ agendamentos.observacao }}">
+                <label>Volume Pallets</label>
+                <input type="text" name="volumePalletsForm" value="{{ agendamentos.volumePallets }}">
+                <label>Volume Cxs</label>
+                <input type="text" name="volumeCxsForm" value="{{ agendamentos.volumeCxs }}">
+            </div>
+
+            <div class="formEdiv">
+                <h3>Divergências</h3>
+                <label>Divergência</label>
+                <div class="formEdivCheckbox">
+                    <input type="checkbox" name="divergForm" {% if novaDiverg.diverg %}checked{% endif %}>
+                </div>
+                <label>Motivo</label>
+                <input type="text" name="divergMotivoForm" value="{{ novaDiverg.divergMotivo }}">
+                <label>Observação</label>
+                <input type="text" name="divergObsForm" value="{{ novaDiverg.divergObs }}">
+            </div>
+
+            <div class="formEdiv">
+                <h3>Trocas</h3>
+                <label>Trocas</label>
+                <div class="formEdivCheckbox">
+                    <input type="checkbox" name="trocasForm" {% if novaTroca.trocas %}checked{% endif %}>
+                </div>
+                <label>Valor Trocas</label>
+                <input type="text" name="trocasValorForm" value="{{ novaTroca.trocasValor if novaTroca else '' }}">
+                <label>Observação</label>
+                <input type="text" name="trocasObsForm" value="{{ novaTroca.trocasObs if novaTroca else '' }}">
+
+                <h3>Devoluções</h3>
+                <label>Devoluções</label>
+                <div class="formEdivCheckbox">
+                    <input type="checkbox" name="devolucoesForm" {% if novaDevolucao.devolucoes %}checked{% endif %}>
+                </div>
+                <label>Valor Devolução</label>
+                <input type="text" name="devolucoesValorForm" value="{{ novaDevolucao.devolucoesValor if novaDevolucao else '' }}">
+                <label>Observação</label>
+                <input type="text" name="devolucoesObsForm" value="{{ novaDevolucao.devolucoesObs if novaDevolucao else '' }}">
+            </div>
+
+            <div class="formEdiv">
+                <h3>Recebimento</h3>
+                <label>Recebimento</label>
+                <div class="formEdivCheckbox">
+                    <input type="checkbox" name="recebimentoForm" {% if novoRecebimento.recebimento %}checked{% endif %}>
+                </div>
+                <label>Observação</label>
+                <input type="text" name="recebimentObsForm" value="{{ novoRecebimento.recebimentObs if novoRecebimento else '' }}">
+                <label>Qtde Pallets</label>
+                <input type="text" name="recebQtdePalletsForm" value="{{ novoRecebimento.recebQtdePallets if novoRecebimento else '' }}">
+                <label>Qtde Cxs</label>
+                <input type="text" name="recebQtdeChapasForm" value="{{ novoRecebimento.recebQtdeChapas if novoRecebimento else '' }}">
+            </div>
+        </div>
+
+        <div class="formEbutton">
+            <button type="submit" class="btn-v">Incluir Agendamento</button>
+        </div>
+    </form>
+{% endblock %}
