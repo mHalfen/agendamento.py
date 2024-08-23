@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, request, redirect, url_for, current_app, Response
+from flask import Blueprint, render_template, request, redirect, url_for, jsonify, Response
 from flask_login import login_required
 from db import db
-from models import Agendamentos, Divergencias, Trocas, Devolucoes, Recebimento
+from models import Agendamentos, Divergencias, Trocas, Devolucoes, Recebimento, Fornecedores
 from datetime import datetime
 from werkzeug.utils import secure_filename
 import os
@@ -14,6 +14,16 @@ login_bp = Blueprint('login', __name__)
 def allowed_file(filename):
     allowed_extensions = {'pdf'}
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extensions
+
+
+@home_bp.route('/suggestions')
+def suggestions():
+    termo = request.args.get('termo', '')
+    if termo:
+        fornecedores = db.session.query(Fornecedores.fornecedCnpj, Fornecedores.fornecedRazaoSocial).filter(Fornecedores.fornecedCnpj.like(f'%{termo}%')).all()
+        suggestions = [{'cnpj': f[0], 'razao_social': f[1]} for f in fornecedores]
+        return jsonify(suggestions)
+    return jsonify([])
 
 
 @home_bp.route('/home')
@@ -186,7 +196,7 @@ def home_visualizarAgendamento_editar(id):
                 id=id,
                 trocas=bool(request.form.get('trocasForm')),
                 trocasObs=request.form['trocasObsForm'],
-                trocasValor=request.form['trocasValorForm']
+                trocasValor='0'
             )
             db.session.add(novaTroca)
 
@@ -199,7 +209,7 @@ def home_visualizarAgendamento_editar(id):
                 id=id,
                 devolucoes = bool(request.form.get('devolucoesForm')),
                 devolucoesObs = request.form['devolucoesObsForm'],
-                devolucoesValor = request.form['devolucoesValorForm']
+                devolucoesValor = '0'
             )
             db.session.add(novaDevolucao)
 

@@ -9,9 +9,9 @@ class Agendamentos(db.Model):
     dateContatoResp = db.Column(db.Integer, nullable=True)
     date = db.Column(db.Integer, nullable=False)
     deposito = db.Column(db.String(3), nullable=True)
-    cnpj = db.Column(db.Integer, nullable=False)
+    cnpj = db.Column(db.String, nullable=False)
     fornecedor = db.Column(db.String, nullable=False)
-    numeroPedido = db.Column(db.Integer(6), nullable=False, unique=True)
+    numeroPedido = db.Column(db.String, nullable=False, unique=True)
     observacao = db.Column(db.String, nullable=True)
     volumePallets = db.Column(db.Integer, nullable=True)
     volumeCxs = db.Column(db.Integer, nullable=True)
@@ -34,7 +34,7 @@ class Trocas(db.Model):
     id = db.Column(db.Integer, db.ForeignKey('agendamento.id', ondelete='CASCADE'), nullable=False, primary_key=True)
     trocas = db.Column(db.Boolean, default=False)
     trocasObs = db.Column(db.String, nullable=True)
-    trocasValor = db.Column(db.Float, nullable=True)
+    trocasValor = db.Column(db.String, nullable=True)
 
 class Devolucoes(db.Model):
     __tablename__ = 'devolucoes'
@@ -59,3 +59,8 @@ class User(db.Model, UserMixin):
     userSenha = db.Column(db.String, nullable=False)
     userToken = db.Column(db.Integer, nullable=True)
     userAdm = db.Column(db.Boolean, nullable=True)
+
+class Fornecedores(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    fornecedCnpj = db.Column(db.String, nullable=True)
+    fornecedRazaoSocial = db.Column(db.String, nullable=True)
