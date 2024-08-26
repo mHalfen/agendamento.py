@@ -85,7 +85,6 @@ def home_visualizarAgendamento():
 
 
 @home_bp.route('/home/visualizarAgendamento/upload', methods=['POST'])
-@login_required
 def home_visualizarAgendamento_upload():
     # Recupera o ID do agendamento do formulário
     agendamento_id = request.form.get('agendamento_id')

@@ -37,7 +37,7 @@ html, body {
     cursor: pointer;
 }
 
-.sidebar button {
+.sidebarBtnLogout {
     margin-top: auto;
     margin-bottom: 20px;
     padding: 10px 20px;
