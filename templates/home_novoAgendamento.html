@@ -40,6 +40,15 @@
             </div>
         </div>
 
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p class="flashSucess {{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    
+
         <div class="formNbutton">
             <button type="submit">Agendar</button>
         </div>

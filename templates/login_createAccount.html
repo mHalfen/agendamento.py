@@ -6,24 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criar Conta</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/createAccount.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flash.css') }}">
 </head>
 
 <body>
-
     <form class="form" action="{{ url_for('login.createAccount') }}" method="post">
         <p class="title">Registre-se:</p>
-        <div class="flex">
-            <label>
-                <input class="input" type="text" name="userNomeForm" required>
-                <span>Nome:</span>
-            </label>
-        </div>  
 
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p class="flashError {{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <label>
+            <input class="input" type="text" name="userNomeForm" required>
+            <span>Nome:</span>
+        </label>
         <label>
             <input class="input" type="email" name="userEmailForm" required>
             <span>Seuemail@supernicolini.com.br:</span>
-        </label> 
-
+        </label>
         <label>
             <input class="input" type="password" name="userSenhaForm" required>
             <span>Senha:</span>
@@ -32,9 +37,11 @@
             <input class="input" type="password" name="userSenhaConfirmForm" required>
             <span>Confirme sua Senha:</span>
         </label>
+
         <button class="submit">Criar Conta</button>
+
         <p class="signin">Já possuí uma conta? <a href="{{ url_for('login.login') }}">Entrar</a></p>
     </form>
-
 </body>
+
 </html>

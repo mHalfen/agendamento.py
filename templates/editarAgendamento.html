@@ -15,8 +15,10 @@
                 <input type="text" name="depositoForm" value="{{ agendamentos.deposito }}" required>
                 <label>CNPJ</label>
                 <input type="text" id="cnpj" name="cnpjForm" value="{{ agendamentos.cnpj }}" required>
+                <div id="cnpj-suggestions" class="suggestions-list"></div>
                 <label>Fornecedor</label>
                 <input type="text" id="fornecedor" name="fornecedorForm" value="{{ agendamentos.fornecedor }}" required>
+                <div id="fornecedor-suggestions" class="suggestions-list"></div>
                 <label>N° Pedido</label>
                 <input type="text" id="numeroPedido" name="numeroPedidoForm" value="{{ agendamentos.numeroPedido }}" required>
                 <label>Observação</label>
@@ -77,7 +79,9 @@
         </div>
 
         <div class="formEbutton">
-            <button type="submit" class="btn-v">Incluir Agendamento</button>
+            <button type="submit" class="btn-v">Atualizar Dados</button>
         </div>
     </form>
 {% endblock %}
+
+{% block scripts %}<script src="{{ url_for('static', filename='js/suggestions.js') }}"></script>{% endblock %}

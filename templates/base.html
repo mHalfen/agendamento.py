@@ -8,8 +8,8 @@
         <title>{% block title %}{% endblock %}</title>
         {% block css %}{% endblock %}
         <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/flash.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='icons/bootstrap-icons.css') }}">
-        {% block scripts %}{% endblock %}
     </head>
 
     <body>
@@ -52,6 +52,7 @@
                 {% endblock %}
             </div>
         </div>
+        {% block scripts %}<script src="{{ url_for('static', filename='js/suggestions.js') }}"></script>{% endblock %}
     </body>
 
 </html>

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, jsonify, Response
+from flask import Blueprint, render_template, request, redirect, url_for, jsonify, Response, flash
 from flask_login import login_required
 from db import db
 from models import Agendamentos, Divergencias, Trocas, Devolucoes, Recebimento, Fornecedores
@@ -66,8 +66,10 @@ def home_novoAgendamento():
             volumePallets = volumePallets,
             volumeCxs = volumeCxs)
         
+        flash('Agendamento incluido com sucesso.', 'agendSucess')
+
         db.session.add(novoAgendamento)
-        db.session.commit()      
+        db.session.commit()
     return redirect(url_for('home.home_novoAgendamento'))
 
 

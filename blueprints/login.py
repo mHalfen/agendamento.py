@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from db import db
 from models import User
@@ -25,7 +25,8 @@ def login():
         user = db.session.query(User).filter_by(userEmail=userEmail, userSenha=userSenha).first()
 
         if not user:
-            return 'Email ou senha incorretos.'
+            flash('Email ou senha incorretos.', 'error')
+            return redirect(url_for('login.login'))
     
         login_user(user)
         return redirect(url_for('home.home'))
@@ -43,7 +44,18 @@ def createAccount():
         userSenhaConfirm = request.form['userSenhaConfirmForm']
 
         if userSenha != userSenhaConfirm:
-            return 'As senhas devem ser iguals.'
+            flash('As senhas devem ser iguais', 'error')
+            return redirect(url_for('login.createAccount'))
+        
+        userNomeExist = db.session.query(User).filter_by(userNome=userNome).first()
+        if userNomeExist:
+            flash('Nome em uso', 'error')
+            return redirect(url_for('login.createAccount'))
+        
+        userEmailExist = db.session.query(User).filter_by(userEmail=userEmail).first()
+        if userEmailExist:
+            flash('Email em uso', 'error')
+            return redirect(url_for('login.createAccount'))
 
         newUser = User(
             userNome = userNome,
@@ -53,6 +65,7 @@ def createAccount():
 
         db.session.add(newUser)
         db.session.commit()
+        flash('Conta criada com sucesso', 'success')
 
         login_user(newUser)
     return redirect(url_for('login.login'))
